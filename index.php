@@ -1,11 +1,11 @@
 <?php
-session_start(); // Start the session
+session_start(); 
 
 $conn = mysqli_connect('localhost:4306', 'root', '', 'stdinfo');
 $showUpdateForm = false;
 $updateSuccessful = false;
 
-// Handle Submit Form
+
 if (isset($_POST['btn'])) {
     $stdname = $_POST['stdname'];
     $stdreg = $_POST['stdreg'];
@@ -23,7 +23,6 @@ if (isset($_POST['btn'])) {
     exit;
 }
 
-// Handle Delete
 if (isset($_GET['delete'])) {
     $stdid = $_GET['delete'];
     $query = "DELETE FROM student WHERE id={$stdid}";
@@ -31,11 +30,11 @@ if (isset($_GET['delete'])) {
     if ($deleteQuery) {
         $_SESSION['message'] = "Data successfully deleted.";
     }
-    header("Location: index.php"); // Redirect to avoid re-triggering delete
+    header("Location: index.php"); 
     exit;
 }
 
-// Show Update Form
+
 if (isset($_GET['update'])) {
     $stdid = $_GET['update'];
     $query = "SELECT * FROM student WHERE id={$stdid}";
@@ -49,7 +48,7 @@ if (isset($_GET['update'])) {
     }
 }
 
-// Handle Update Form Submission
+
 if (isset($_POST['update-btn'])) {
     $stdname = $_POST['stdname'];
     $stdreg = $_POST['stdreg'];
@@ -80,7 +79,7 @@ if (isset($_POST['update-btn'])) {
 
 <div class="container shadow m-5 p-4 mx-auto rounded">
     <?php
-    // Display session message if it exists
+   
     if (isset($_SESSION['message'])) {
         echo "<div class='alert alert-info'>{$_SESSION['message']}</div>";
         unset($_SESSION['message']); // Clear the message after displaying
